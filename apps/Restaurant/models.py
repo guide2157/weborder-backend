@@ -21,9 +21,8 @@ class RestaurantTag(tagulous_models.TagTreeModel):
 
 
 class Restaurant(models.Model):
-    detail = models.TextField
+    detail = models.TextField(default='A restaurant')
     gallery = models.CharField(max_length=120)
-    id = models.IntegerField
     image_thumbnail = models.CharField(max_length=120)
     meta_description = models.CharField(max_length=120)
     meta_title = models.CharField(max_length=120)

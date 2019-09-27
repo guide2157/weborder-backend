@@ -21,7 +21,7 @@ class MenuTag(tagulous_models.TagTreeModel):
 
 class Menu(models.Model):
     category_name = models.CharField(max_length=120)
-    detail = models.TextField
+    detail = models.TextField(default='Food')
     image = models.CharField(max_length=120)
     meta_description = models.CharField(max_length=120)
     meta_title = models.CharField(max_length=120)

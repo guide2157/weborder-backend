@@ -7,16 +7,14 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 
 
-class RestaurantList(generics.ListCreateAPIView):
+class RestaurantView(generics.ListCreateAPIView):
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
     lookup_fields = ('id', 'slug')
 
-    def get_featured_menus(self, obj_id):
-        featured_menu_group = Menu.objects.filter(id=obj_id)
+    def get_featured_menus(self, menus):
         featured_menus = []
-
-        for menu_group in featured_menu_group:
+        for menu_group in menus:
             menu_data = MenuSerializer(menu_group).data
 
             if menu_data is not None:
@@ -37,7 +35,7 @@ class RestaurantList(generics.ListCreateAPIView):
 
         restaurant_serializer = RestaurantSerializer(obj)
 
-        featured_menu_serializer = self.get_featured_menus(obj.object_pk)
+        featured_menu_serializer = self.get_featured_menus(obj.featured_menus.all())
 
         payload = {
             **restaurant_serializer.data,
