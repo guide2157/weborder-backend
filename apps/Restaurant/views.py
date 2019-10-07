@@ -1,4 +1,3 @@
-from .models import Menu
 from .models import Restaurant
 from .serializers import RestaurantSerializer
 from ..Menu.serializers import MenuSerializer

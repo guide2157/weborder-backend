@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.Menu',
     'apps.Restaurant',
     'rest_framework',
+    # 'channels',
     'corsheaders'
 ]
 
@@ -128,7 +129,21 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+    )
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "host": ['redis://localhost:6379']
+#         },
+#     }
+# }
