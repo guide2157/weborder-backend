@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.Menu',
     'apps.Restaurant',
+    'apps.Order',
     'rest_framework',
     # 'channels',
     'corsheaders'

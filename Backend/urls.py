@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^menus/', include('apps.Menu.urls')),
     url(r'^restaurant/', include('apps.Restaurant.urls')),
-    url(r'^token-auth/', obtain_jwt_token)
+    url(r'^token-auth/', obtain_jwt_token),
+    url(r'^order/', include('apps.Order.urls'))
 
 ]
