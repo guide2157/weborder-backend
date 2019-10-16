@@ -1,0 +1,10 @@
+#order-log div {
+    background-color: lightgray;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#order-log p {
+    display: inline-block;
+    margin: 1rem;
+}

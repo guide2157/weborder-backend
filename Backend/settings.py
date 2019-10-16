@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'apps.Restaurant',
     'apps.Order',
     'rest_framework',
-    # 'channels',
+    'channels',
     'corsheaders'
 ]
 
@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Pacific'
 
 USE_I18N = True
 
@@ -124,6 +124,7 @@ USE_TZ = True
 # =========================== Static, Media settings =========================
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # ============================= Other settings ================================
@@ -140,11 +141,13 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
-#         'CONFIG': {
-#             "host": ['redis://localhost:6379']
-#         },
-#     }
-# }
+ASGI_APPLICATION = 'Backend.routing.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)]
+        },
+    }
+}

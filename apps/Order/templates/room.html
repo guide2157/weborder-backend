@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+{% load staticfiles  %}
+<head>
+    <meta charset="utf-8"/>
+    <title>Order list</title>
+    <link rel="stylesheet" href="{% static "css/room.css" %}">
+</head>
+<body>
+    <div id="order-log" >
+    </div>
+
+</body>
+<script> var roomName = {{ room_name_json }}; </script>
+<script type="text/javascript" src="{% static "js/room.js" %}"></script>
+</html>
