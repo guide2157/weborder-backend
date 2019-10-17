@@ -31,16 +31,14 @@ class place_order(APIView):
                 'ref_code': refcode,
                 'time': time.strftime("%H:%M:%S %p", time.localtime())
             }
-            orders = {
-
-            }
+            orders = {}
 
             for id in menus:
                 amount = menus[id]
                 menu = Menu.objects.get(id=int(id))
                 orders[menu.name] = amount
                 dish = Dish.objects.create(food=menu, quantity=int(amount))
-                order.food.add(dish.pk)
+                order.dish_set.add(dish)
             order_detail['orders'] = orders
             channel_layer = get_channel_layer()
             async_to_sync(channel_layer.group_send)("chat_order_list",
