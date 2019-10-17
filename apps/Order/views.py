@@ -29,7 +29,7 @@ class place_order(APIView):
             )
             order_detail = {
                 'ref_code': refcode,
-                'time': time.strftime("%H:%M:%S %p", time.localtime())
+                'time': time.strftime("%I:%M:%S %p", time.localtime())
             }
             orders = {}
 

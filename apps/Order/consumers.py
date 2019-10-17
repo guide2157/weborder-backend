@@ -1,6 +1,8 @@
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
 
+from apps.Order.models import Order
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -25,16 +27,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json['message']
-
-        # Send message to room group
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'chat_message',
-                'message': message
-            }
-        )
+        data = text_data_json['message']
+        if data['done']:
+            ref_code = data['ref_code']
+            order = Order.objects.get(ref_code=ref_code)
+            order.delete()
+        else:
+            # Send message to room group
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'message': data
+                }
+            )
 
     # Receive message from room group
     async def chat_message(self, event):
